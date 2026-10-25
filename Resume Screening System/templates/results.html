@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screening Results - AI Resume Screening System</title>
+    <!-- Link to external CSS stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Main Container -->
+    <div class="container container-large">
+        
+        <!-- Header with navigation -->
+        <div class="results-header">
+            <div>
+                <h1>Screening Results</h1>
+                <p class="subtitle">Candidates ranked by SBERT (Sentence-BERT) Embeddings and Cosine Similarity against the Job Description.</p>
+            </div>
+            <!-- Button to go back and screen new resumes -->
+            <a href="/" class="btn-secondary">← Screen More Resumes</a>
+        </div>
+
+        <!-- Summary Statistics Card -->
+        <div class="stats-row">
+            <div class="stat-card">
+                <span class="stat-label">Total Resumes Processed</span>
+                <span class="stat-value">{{ total }}</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Top Candidate Score</span>
+                <span class="stat-value text-green">{{ candidates[0].score }}%</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Top Candidate</span>
+                <span class="stat-value text-truncate">{{ candidates[0].filename }}</span>
+            </div>
+        </div>
+
+        <!-- Table Card -->
+        <div class="card table-card">
+            <!-- Responsive Table Container -->
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 80px;">Rank</th>
+                            <th>Candidate (File Name)</th>
+                            <th style="width: 140px;">Match Score</th>
+                            <th>Skills Found</th>
+                            <th>Skills Missing</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Loop through each ranked candidate -->
+                        {% for candidate in candidates %}
+                        <!-- Highlight top candidate in green, and low scores (<40) in red -->
+                        <tr class="{% if candidate.rank == 1 %}row-top{% elif candidate.score < 40 %}row-low{% endif %}">
+                            
+                            <!-- Column 1: Rank -->
+                            <td>
+                                {% if candidate.rank == 1 %}
+                                    <span class="rank-badge rank-first">🥇 #1</span>
+                                {% else %}
+                                    <span class="rank-badge">#{{ candidate.rank }}</span>
+                                {% endif %}
+                            </td>
+
+                            <!-- Column 2: File Name -->
+                            <td class="font-medium">
+                                {{ candidate.filename }}
+                                {% if candidate.rank == 1 %}
+                                    <span class="badge-top-match">Top Match</span>
+                                {% endif %}
+                            </td>
+
+                            <!-- Column 3: Match Score -->
+                            <td>
+                                <div class="score-container">
+                                    <span class="score-text {% if candidate.rank == 1 %}score-high{% elif candidate.score < 40 %}score-low{% else %}score-mid{% endif %}">
+                                        {{ candidate.score }}%
+                                    </span>
+                                    <!-- Progress bar showing visual percentage -->
+                                    <div class="progress-bar-bg">
+                                        <div class="progress-bar-fill {% if candidate.rank == 1 %}fill-green{% elif candidate.score < 40 %}fill-red{% else %}fill-blue{% endif %}" 
+                                             style="width: {{ candidate.score }}%;"></div>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <!-- Column 4: Skills Found (Green Badges) -->
+                            <td>
+                                {% if candidate.skills_found %}
+                                    <div class="pill-group">
+                                        {% for skill in candidate.skills_found %}
+                                            <span class="pill pill-success">{{ skill }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    <span class="text-muted">None detected</span>
+                                {% endif %}
+                            </td>
+
+                            <!-- Column 5: Skills Missing (Red/Gray Badges) -->
+                            <td>
+                                {% if candidate.skills_missing %}
+                                    <div class="pill-group">
+                                        {% for skill in candidate.skills_missing %}
+                                            <span class="pill pill-missing">{{ skill }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    <span class="text-green font-medium">All skills present!</span>
+                                {% endif %}
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Legend / Notes for College Presentation -->
+        <div class="legend-card">
+            <h4>💡 Scoring Legend:</h4>
+            <div class="legend-items">
+                <span class="legend-item"><span class="legend-dot dot-green"></span> Green row: Highest ranked candidate</span>
+                <span class="legend-item"><span class="legend-dot dot-red"></span> Red row / badge: Low score (below 40%)</span>
+                <span class="legend-item"><span class="legend-dot dot-blue"></span> Score calculated via SBERT & Cosine Similarity</span>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

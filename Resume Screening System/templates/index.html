@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Screening System</title>
+    <!-- Link to external CSS stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Main Centered Container -->
+    <div class="container">
+        
+        <!-- Header Card -->
+        <div class="card header-card">
+            <h1>AI Resume Screening System</h1>
+            <p class="subtitle">Match, score, and rank multiple candidate resumes against any Job Description using NLP.</p>
+        </div>
+
+        <!-- Error Message Alert (only appears if there is an error) -->
+        {% if error_message %}
+        <div class="alert alert-error">
+            <span>⚠️</span>
+            <span>{{ error_message }}</span>
+        </div>
+        {% endif %}
+
+        <!-- Form Card -->
+        <div class="card form-card">
+            <!-- Form submits to /screen route with POST method and multipart encoding for files -->
+            <form action="/screen" method="POST" enctype="multipart/form-data">
+                
+                <!-- Section 1: Job Description Input -->
+                <div class="form-group">
+                    <label for="job_description">1. Paste Job Description</label>
+                    <textarea 
+                        name="job_description" 
+                        id="job_description" 
+                        rows="7" 
+                        placeholder="Paste the complete job description here (e.g. required skills, qualifications, experience)..." 
+                        required></textarea>
+                </div>
+
+                <!-- Section 2: Resume PDF Upload -->
+                <div class="form-group">
+                    <label for="resumes">2. Upload Candidate Resumes (PDF only)</label>
+                    <div class="file-upload-box">
+                        <input 
+                            type="file" 
+                            name="resumes" 
+                            id="resumes" 
+                            accept=".pdf" 
+                            multiple 
+                            required>
+                        <p class="file-hint">📄 Select one or multiple PDF files</p>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn-primary">
+                    🔍 Screen & Rank Resumes
+                </button>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Built with Python, Flask, PyPDF2, SBERT & Scikit-Learn</p>
+        </div>
+
+    </div>
+
+</body>
+</html>

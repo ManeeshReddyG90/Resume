@@ -1,0 +1,455 @@
+/* ==========================================================
+   AI RESUME SCREENING SYSTEM - STYLESHEET
+   Clean, modern design using one primary accent color (#4f46e5)
+   ========================================================== */
+
+/* 1. Global Reset & Typography */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+    background-color: #f8fafc; /* Soft modern light gray background */
+    color: #1e293b;            /* Dark slate for readable text */
+    min-height: 100vh;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* 2. Layout Containers */
+.container {
+    width: 100%;
+    max-width: 680px; /* Centered card width for input page */
+}
+
+.container-large {
+    max-width: 1100px; /* Wider width for the results table page */
+}
+
+/* 3. Reusable Card Component */
+.card {
+    background: #ffffff;
+    border-radius: 14px;
+    border: 1px solid #e2e8f0;
+    padding: 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+}
+
+.header-card {
+    text-align: center;
+}
+
+h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+/* Badge for College Project Header */
+.badge {
+    display: inline-block;
+    background-color: #e0e7ff;
+    color: #4338ca;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+}
+
+/* 4. Form Elements */
+.form-group {
+    margin-bottom: 24px;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 8px;
+}
+
+textarea {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #1e293b;
+    outline: none;
+    resize: vertical;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+textarea:focus {
+    border-color: #4f46e5; /* Primary Accent Color */
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.file-upload-box {
+    border: 2px dashed #cbd5e1;
+    border-radius: 8px;
+    padding: 24px;
+    text-align: center;
+    background-color: #f8fafc;
+    transition: border-color 0.2s ease;
+}
+
+.file-upload-box:hover {
+    border-color: #4f46e5;
+}
+
+input[type="file"] {
+    font-size: 14px;
+    color: #475569;
+}
+
+.file-hint {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* 5. Buttons */
+.btn-primary {
+    width: 100%;
+    background-color: #4f46e5; /* Single Primary Accent */
+    color: #ffffff;
+    border: none;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-primary:hover {
+    background-color: #4338ca;
+}
+
+.btn-primary:active {
+    transform: scale(0.99);
+}
+
+.btn-secondary {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #4f46e5;
+    border: 1px solid #c7d2fe;
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #eef2ff;
+    border-color: #4f46e5;
+}
+
+/* 6. Alert Boxes */
+.alert {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.alert-error {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+}
+
+/* 7. Results Page Header & Stat Cards */
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    background: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    padding: 18px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.stat-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.text-truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 16px;
+}
+
+/* 8. Results Table */
+.table-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+}
+
+thead th {
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+    padding: 14px 18px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+tbody tr {
+    border-bottom: 1px solid #f1f5f9;
+    transition: background-color 0.15s ease;
+}
+
+tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+tbody td {
+    padding: 16px 18px;
+    vertical-align: middle;
+}
+
+/* Highlighting requirements */
+/* Top candidate row: Highlighted in Soft Green */
+.row-top {
+    background-color: #f0fdf4 !important;
+    border-left: 4px solid #16a34a;
+}
+
+/* Low score candidate row: Highlighted in Soft Red */
+.row-low {
+    background-color: #fef2f2 !important;
+    border-left: 4px solid #dc2626;
+}
+
+/* Badges & Pills */
+.rank-badge {
+    font-weight: 700;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.rank-first {
+    color: #16a34a;
+    font-weight: 800;
+}
+
+.badge-top-match {
+    display: inline-block;
+    background-color: #dcfce7;
+    color: #15803d;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-left: 8px;
+}
+
+.font-medium {
+    font-weight: 500;
+    color: #0f172a;
+}
+
+/* Match Score Display */
+.score-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.score-text {
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.score-high { color: #16a34a; }
+.score-mid  { color: #4f46e5; }
+.score-low  { color: #dc2626; }
+
+.progress-bar-bg {
+    width: 100%;
+    height: 6px;
+    background-color: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+}
+
+.fill-green { background-color: #16a34a; }
+.fill-blue  { background-color: #4f46e5; }
+.fill-red   { background-color: #dc2626; }
+
+/* Skills Pills */
+.pill-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.pill {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+    letter-spacing: 0.02em;
+}
+
+/* Found Skills: Green */
+.pill-success {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+/* Missing Skills: Soft Red */
+.pill-missing {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.text-muted {
+    color: #94a3b8;
+    font-size: 13px;
+    font-style: italic;
+}
+
+.text-green {
+    color: #16a34a;
+}
+
+/* 9. Legend Card */
+.legend-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-top: 10px;
+}
+
+.legend-card h4 {
+    font-size: 13px;
+    color: #475569;
+    margin-bottom: 8px;
+}
+
+.legend-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 12px;
+    color: #64748b;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot-green { background-color: #16a34a; }
+.dot-red   { background-color: #dc2626; }
+.dot-blue  { background-color: #4f46e5; }
+
+/* 10. Footer */
+.footer {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+/* 11. Mobile Responsiveness */
+@media (max-width: 640px) {
+    body {
+        padding: 20px 12px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .results-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .btn-secondary {
+        width: 100%;
+        text-align: center;
+    }
+}
